@@ -17,32 +17,6 @@ class AutomobileVOEncoder(ModelEncoder):
         "model"
     ]
 
-class SaleListEncoder(ModelEncoder):
-    model = SaleRecord
-    properties = [
-        "sales_person",
-        "employee_number",
-        "customer",
-        "vin",
-        "price"
-    ]
-    encoders = {
-        "vin": AutomobileVOEncoder(),
-    }
-
-class SaleRecordDetailEncoder(ModelEncoder):
-    model = SaleRecord
-    properies = [
-        "automobile",
-        "sales_person",
-        "customer",
-        "sales_person_number",
-        "price"
-    ]
-    encoders = {
-        "automobile": AutomobileVOEncoder(),
-    }
-
 class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
@@ -58,7 +32,37 @@ class CustomerEncoder(ModelEncoder):
         "phone_number"
     ]
 
-@require_http_methods(["GET", "POST"])
+class SaleListEncoder(ModelEncoder):
+    model = SaleRecord
+    properties = [
+        "sales_person",
+        "customer",
+        "automobile",
+        "price"
+    ]
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonEncoder(),
+        "customer": CustomerEncoder(),
+    }
+
+class SaleRecordDetailEncoder(ModelEncoder):
+    model = SaleRecord
+    properties = [
+        "automobile",
+        "sales_person",
+        "customer",
+        "price"
+    ]
+    encoders = {
+        "automobile": AutomobileVOEncoder(),
+        "sales_person": SalesPersonEncoder(),
+        "customer": CustomerEncoder()
+    }
+
+
+
+@require_http_methods(["GET"])
 def list_sales(request):
     if request.method == "GET":
         salerecord = SaleRecord.objects.all()
@@ -68,15 +72,38 @@ def list_sales(request):
             encoder=SaleListEncoder,
             safe=False
         )
-    else:
+
+@require_http_methods(["POST"])
+def create_salerecord(request):
+    if request.method == "POST":
         content = json.loads(request.body)
+        print(content)
         try:
-            href = content["automobile"]  #href or automobile????
-            automobile = AutomobileVO.objects.get(import_href=href) # href or id????
+            auto = content["automobile"]  #href or automobile or vin????
+            automobile = AutomobileVO.objects.get(import_href=auto) # href or id or vin????
+            print(automobile)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                {"message": "Invalid automobile href"},
+                {"message": "Invalid automobile vin"},
+                status=400
+            )
+        try:
+            sales_person_id = content["sales_person"]
+            sales_person = SalesPerson.objects.get(id=sales_person_id)
+            content["sales_person"] = sales_person
+        except SalesPerson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid sales person"},
+                status=400
+            )
+        try:
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "invalid customer"},
                 status=400
             )
         salerecord = SaleRecord.objects.create(**content)

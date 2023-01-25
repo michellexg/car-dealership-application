@@ -18,20 +18,21 @@ def poll():
     while True:
         print('Sales poller polling for data')
         try:
-            url = "http://localhost:8100/api/automobiles/"
+            url = "http://inventory-api:8000/api/automobiles/"
             response = requests.get(url)
             content = json.loads(response.content)
-            for automobile in content["automobiles"]:
+            for automobile in content["autos"]:
                 AutomobileVO.objects.update_or_create(
-                    vin = automobile["vin"],
+                    import_href = automobile["href"],
                     defaults ={
-                        "model": automobile["model"],
-                        "year": automobile["year"],
-                        "color": automobile["color"]
+                        "model": automobile["model"]["name"],
+                        "vin": automobile["vin"]
                     },
+
                 )
             # Write your polling logic, here
-            pass
+            automobile = AutomobileVO.objects.all()
+            # print(automobile)
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(60)

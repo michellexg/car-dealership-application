@@ -9,7 +9,7 @@ class AutomobileVO(models.Model):
 class SalesPerson(models.Model):
     sales_person_name = models.CharField(max_length=50)
     employee_number = models.PositiveIntegerField()
-   
+
 
 class Customer(models.Model):
     customer_name = models.CharField(max_length=50)
@@ -25,11 +25,6 @@ class SaleRecord(models.Model):
     sales_person = models.ForeignKey(
         SalesPerson,
         related_name="sales_person",
-        on_delete=models.CASCADE,
-    )
-    sales_person_number = models.ForeignKey(
-        SalesPerson,
-        related_name="sales_person_number",
         on_delete=models.CASCADE,
     )
     customer = models.ForeignKey(

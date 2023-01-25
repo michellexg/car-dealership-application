@@ -3,7 +3,7 @@ function SaleRecordList({salerecords, getSaleRecords}){
     if (salerecords === undefined){
         return null;
     }
-
+    console.log(salerecords);
     return(
         <>
         <table className="table table-striped">
@@ -20,8 +20,9 @@ function SaleRecordList({salerecords, getSaleRecords}){
           {salerecords.map(salesrecord => {
             return (
               <tr key={salesrecord.vin}>
-                <td>{ salesrecord.sales_person_name }</td>
-                <td>{ salesrecord.sales_person_number }</td>
+                <td>{ salesrecord.sales_person.sales_person_name }</td>
+                <td>{ salesrecord.sales_person.employee_number }</td>
+                <td>{ salesrecord.customer.customer_name }</td>
                 <td>{ salesrecord.automobile.vin }</td>
                 <td>{ salesrecord.price }</td>
               </tr>
