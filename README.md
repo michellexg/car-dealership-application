@@ -6,7 +6,7 @@ Team:
 * Tyler Herman - Sales
 
 ## How to Run this Application
-* Go to gitlab.com/felipsh/project-beta
+* Go to [gitlab.com/felipsh/project-beta](https://gitlab.com/felipsh/project-beta)
 * Click “Clone” to clone project and copy the https link.
 In terminal, run following commands:
 * Clone the project folder: `git clone <copy clone link here>`
@@ -17,7 +17,7 @@ In terminal, run following commands:
 In browser visit: [http://localhost:3000/](http://localhost:3000/)
 
 ## Design
-(Excalidraw link)
+![Excalidraw link](https://excalidraw.com/#json=_RpHKZ9bNUPAVw5wQZ1xK,wGDHxxrLtQZ9dDnCzo0yvA)
 https://excalidraw.com/#json=_RpHKZ9bNUPAVw5wQZ1xK,wGDHxxrLtQZ9dDnCzo0yvA
 
 ## CRUD Routes, API Documentation
@@ -112,10 +112,10 @@ Returns (status code 200):
 }
 ```
 
-DELETE request to /api/appointments/<int:id>
+DELETE request to /api/appointments/\<int:id>
 Delete appointments based on their id numbers
 
-POST request to /api/appointments/<int:id>
+POST request to /api/appointments/\<int:id>
 Change appointment's "finished" status from default false to true based on their id numbers
 
 ### Sales Microservice
