@@ -17,8 +17,7 @@ In terminal, run following commands:
 In browser visit: [http://localhost:3000/](http://localhost:3000/)
 
 ## Design
-![Excalidraw link](https://excalidraw.com/#json=_RpHKZ9bNUPAVw5wQZ1xK,wGDHxxrLtQZ9dDnCzo0yvA)
-https://excalidraw.com/#json=_RpHKZ9bNUPAVw5wQZ1xK,wGDHxxrLtQZ9dDnCzo0yvA
+[Excalidraw link](https://excalidraw.com/#json=_RpHKZ9bNUPAVw5wQZ1xK,wGDHxxrLtQZ9dDnCzo0yvA)
 
 ## CRUD Routes, API Documentation
 ### Service Microservice
@@ -112,10 +111,10 @@ Returns (status code 200):
 }
 ```
 
-DELETE request to /api/appointments/\<int:id>
+DELETE request to [/api/appointments/<id>]
 Delete appointments based on their id numbers
 
-POST request to /api/appointments/\<int:id>
+POST request to [/api/appointments/<id>]
 Change appointment's "finished" status from default false to true based on their id numbers
 
 ### Sales Microservice
