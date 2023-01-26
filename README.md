@@ -200,6 +200,8 @@ POST request to /api/sales/salesperson/
 }
 GET request to /api/sales/history/
 Returns sales history by selected sales person - one history record below:
+
+```
     {
 	"sales_history": [
 		{
@@ -221,6 +223,8 @@ Returns sales history by selected sales person - one history record below:
 			},
 			"price": 12000
 		},
+```
+
 ## Service microservice
 
 ### Technician Model
