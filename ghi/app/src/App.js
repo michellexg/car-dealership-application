@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import MainPage from './MainPage';
@@ -10,69 +11,15 @@ import TechnicianForm from './TechnicianForm';
 import AppointmentsList from './AppointmentsList';
 import AppointmentForm from './AppointmentForm';
 import ServiceHistory from './ServiceHistory';
+import VehicleModelList from './VehicleModelList';
+import VehicleModelForm from './VehicleModelForm';
+import SaleRecordList from './SaleRecordList';
+import SalesPersonForm from './CreateSalesPersonForm';
+import CustomerForm from './CreateCustomerForm';
+import SaleRecordForm from './CreateSaleRecord';
+import SalesHistoryList from './SalesHistoryList';
 
 function App() {
-  // const [manufacturers, setManufacturers] = useState([]);
-  // const [automobiles, setAutomobiles] = useState([]);
-  // const [salesRecords, setSalesRecords] = useState([]);
-  // const [appointments, setAppointment] = useState([]);
-
-  // const getManufacturers = async () => {
-  //   const response = await fetch('http://localhost:8100/api/manufacturers/');
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const manufacturers = data.manufacturers;
-  //     setManufacturers(manufacturers);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
-
-  // const getAutomobiles = async () => {
-  //   const response = await fetch('http://localhost:8100/api/automobiles/');
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const automobiles = data.autos;
-  //     setAutomobiles(automobiles);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
-
-  // const getSalesRecord = async () => {
-  //   const response = await fetch('http://localhost:8090/api/sales/');
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const salesRecords = data.salerecord;
-  //     setSalesRecords(salesRecords);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
-
-  // const getAppointment = async () => {
-  //   const response = await fetch('http://localhost:8080/api/appointments/');
-  //   if (response.ok) {
-  //     const data = await response.json();
-  //     const appointments = data.appointments;
-  //     let unfinishedAppointment = []
-  //     for (let appointment of appointments) {
-  //       if (appointment.finished === false) {
-  //         unfinishedAppointment.push(appointment)
-  //       }
-  //     }
-  //     setAppointment(unfinishedAppointment);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   // getManufacturers();
-  //   // getAutomobiles();
-  //   getAppointment();
-  //   getSalesRecord();
-  // }, [])
 
   return (
     <BrowserRouter>
@@ -93,6 +40,17 @@ function App() {
             <Route path="new/" element={<AppointmentForm />} />
             <Route path="history/" element={<ServiceHistory />} />
             <Route path="technicians/new/" element={<TechnicianForm />} />
+          </Route>
+          <Route path="models/">
+            <Route path="" element={<VehicleModelList />} />
+            <Route path="new/" element={<VehicleModelForm />} />
+          </Route>
+          <Route path="sales/">
+            <Route path="" element={<SaleRecordList />} />
+            <Route path="salesperson/" element={<SalesPersonForm />} />
+            <Route path="customer/" element={<CustomerForm />} />
+            <Route path="salerecord/" element={<SaleRecordForm />} />
+            <Route path="history/" element={<SalesHistoryList />} />
           </Route>
         </Routes>
       </div>
