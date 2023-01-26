@@ -82,8 +82,6 @@ useEffect(() => {
     fetchData();
 }, []);
 
-// console.log("salerecords:", salerecords);
-
 return (
     <div className="container">
       <div className="row">

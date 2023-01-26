@@ -1,4 +1,4 @@
-
+import { NavLink } from 'react-router-dom';
 
 function VehicleModelList({models, getModels}){
     if (models === undefined){
@@ -7,6 +7,12 @@ function VehicleModelList({models, getModels}){
 
     return(
         <>
+        <h1>Vehicle Model List</h1>
+        <ul>
+        <li className="nav-item">
+              <NavLink className="nav-link" to="/models/new">Create a Vehicle Model</NavLink>
+        </li>
+        </ul>
         <table className="table table-striped">
         <thead>
           <tr>

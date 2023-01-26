@@ -13,7 +13,6 @@ import SalesHistoryList from './SalesHistoryList';
 function App() {
   const [models, setModels] = useState([])
   const [salerecords, setSaleRecords] = useState([])
-  const [automobiles, setAutomobiles] = useState([])
   const [salespersons, setSalesPersons] = useState([])
 
   const getModels = async() => {
@@ -30,21 +29,10 @@ function App() {
     if (response.ok){
       const data = await response.json();
       const salerecords = data.salerecord;
-      console.log("data:", data);
-      console.log("salerecords:", salerecords);
       setSaleRecords(salerecords);
     }
   }
 
-//   const getAutomobiles = async() => {
-//     const response = await fetch('http://localhost:8100/api/automobiles/')
-//     if (response.ok){
-//       const data = await response.json();
-//       const automobiles = data.automobiles;
-
-//       setAutomobiles(automobiles);
-// }
-// }
 const getSalesPersons = async() => {
   const response = await fetch('http://localhost:8090/api/sales/salesperson/')
   if (response.ok){
@@ -59,8 +47,6 @@ const getSalesPersons = async() => {
     getModels();
     getSaleRecords();
     getSalesPersons();
-    // getAutomobiles();
-    // getSalesPersons();
   }, [])
 
   return (

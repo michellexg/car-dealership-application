@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 function SalesPersonForm(props){
-    const [salespersons, setSalesPersons] = useState([])
     const [sales_person_name, setSalesPerson] = useState('')
     const [employee_number, setEmployeeNumber] = useState('')
 
@@ -34,19 +33,6 @@ function SalesPersonForm(props){
             setEmployeeNumber('');
         }
     }
-// const fetchData = async () => {
-//     const url = 'http://localhost:8100/api/manufacturers/';
-//      const response = await fetch(url);
-
-//      if (response.ok){
-//         const data = await response.json();
-//         setManufacturers(data.manufacturers);
-//      }
-// }
-// useEffect(() => {
-//     fetchData();
-// }, []);
-
 
 
 return (

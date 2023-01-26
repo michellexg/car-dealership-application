@@ -44,20 +44,6 @@ function CustomerForm(props){
             setPhoneNumber('');
         }
     }
-// const fetchData = async () => {
-//     const url = 'http://localhost:8100/api/manufacturers/';
-//      const response = await fetch(url);
-
-//      if (response.ok){
-//         const data = await response.json();
-//         setManufacturers(data.manufacturers);
-//      }
-// }
-// useEffect(() => {
-//     fetchData();
-// }, []);
-
-
 
 return (
     <div className="container">

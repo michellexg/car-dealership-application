@@ -1,13 +1,18 @@
+import { NavLink } from 'react-router-dom';
 
 function SaleRecordList({salerecords, getSaleRecords}){
     if (salerecords === undefined){
         return null;
     }
-    console.log(salerecords);
     return(
         <>
 
         <h1>List of Sales</h1>
+        <ul>
+        <li className="nav-item">
+              <NavLink className="nav-link" to="/sales/salerecord">Create a sale record</NavLink>
+            </li>
+        </ul>
         <table className="table table-striped">
         <thead>
           <tr>
