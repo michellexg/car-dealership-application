@@ -21,7 +21,8 @@ class SalesPersonEncoder(ModelEncoder):
     model = SalesPerson
     properties = [
         "sales_person_name",
-        "employee_number"
+        "employee_number",
+        "id"
     ]
 
 class CustomerEncoder(ModelEncoder):
@@ -29,7 +30,8 @@ class CustomerEncoder(ModelEncoder):
     properties = [
         "customer_name",
         "address",
-        "phone_number"
+        "phone_number",
+        "id"
     ]
 
 class SaleListEncoder(ModelEncoder):

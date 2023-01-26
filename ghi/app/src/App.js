@@ -8,6 +8,7 @@ import SaleRecordList from './SaleRecordList';
 import SalesPersonForm from './CreateSalesPersonForm';
 import CustomerForm from './CreateCustomerForm';
 import SaleRecordForm from './CreateSaleRecord';
+import SalesHistoryList from './SalesHistoryList';
 
 function App() {
   const [models, setModels] = useState([])
@@ -35,20 +36,20 @@ function App() {
     }
   }
 
-  const getAutomobiles = async() => {
-    const response = await fetch('http://localhost:8100/api/automobiles/')
-    if (response.ok){
-      const data = await response.json();
-      const automobiles = data.automobiles;
+//   const getAutomobiles = async() => {
+//     const response = await fetch('http://localhost:8100/api/automobiles/')
+//     if (response.ok){
+//       const data = await response.json();
+//       const automobiles = data.automobiles;
 
-      setAutomobiles(automobiles);
-}
-}
+//       setAutomobiles(automobiles);
+// }
+// }
 const getSalesPersons = async() => {
   const response = await fetch('http://localhost:8090/api/sales/salesperson/')
   if (response.ok){
     const data = await response.json();
-    const salespersons = data.salespersons;
+    const salespersons = data.sales_person;
     setSalesPersons(salespersons);
   }
 }
@@ -57,8 +58,9 @@ const getSalesPersons = async() => {
   useEffect(() =>{
     getModels();
     getSaleRecords();
-    getAutomobiles();
     getSalesPersons();
+    // getAutomobiles();
+    // getSalesPersons();
   }, [])
 
   return (
@@ -72,7 +74,8 @@ const getSalesPersons = async() => {
           <Route path="/sales" element = {<SaleRecordList salerecords={salerecords} getSaleRecords={getSaleRecords}/>}></Route>
           <Route path="/sales/salesperson" element = {<SalesPersonForm/>}></Route>
           <Route path="/sales/customer" element = {<CustomerForm/>}></Route>
-          <Route path="/sales/salerecord" element = {<SaleRecordForm salerecords={salerecords} getAutomobiles={getAutomobiles} salespersons={salespersons}/>}></Route>
+          <Route path="/sales/salerecord" element = {<SaleRecordForm salerecords={salerecords}/>}></Route>
+          <Route path="/sales/history" element = {<SalesHistoryList salerecords={salerecords} salespersons={salespersons}/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

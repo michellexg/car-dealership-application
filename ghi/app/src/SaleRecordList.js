@@ -6,6 +6,8 @@ function SaleRecordList({salerecords, getSaleRecords}){
     console.log(salerecords);
     return(
         <>
+
+        <h1>List of Sales</h1>
         <table className="table table-striped">
         <thead>
           <tr>
