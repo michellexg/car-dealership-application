@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 
 
-function CustomerForm(props){
-    const [customers, setCustomers] = useState([])
+function CustomerForm(){
     const [customer_name, setCustomerName] = useState('')
     const [address, setAddress] = useState('')
     const [phone_number, setPhoneNumber] = useState('')

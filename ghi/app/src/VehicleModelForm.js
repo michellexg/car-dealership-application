@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function VehicleModelForm(props){
+function VehicleModelForm(){
     const [manufacturers, setManufacturers] = useState([]);
     const [manufacturer_id, setManufacturer] = useState('');
     const [name, setName] = useState('');

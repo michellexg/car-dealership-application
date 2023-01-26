@@ -10,8 +10,15 @@ Tyler Herman - Sales
 ## How to Run this Application
 (Steps to clone and run application)
 
+
 ## Design
 (Excalidraw link)
+https://excalidraw.com/#json=XTmY6l9yqwv6GdNNroFw2,Xu1p3KPtPpBVm4eISOHB5g
+
+## Links
+The List all Sales link is located in the Nav Bar.
+Links to "Create a sale record", "Add a sales person", "Add a potential customer" and "Sales person history" are included on
+the List all Sales page (localhost:3000/sales).
 
 ## CRUD Routes, API Documentation
 Sales Service: Localhost, Port 8090
@@ -39,7 +46,7 @@ Returns a list of sales records - one sale record below
                 },
                 "price": 12000
             },
-POST request to /api/sales/salrecord/
+POST request to /api/sales/salerecord/
     Request Body:
     {
         "automobile": "/api/automobiles/5989934TJLSOP/",
@@ -125,4 +132,4 @@ The models used in this microservice were SaleRecord, SalesPerson, Customer and 
 related to the Automobile model of the inventory. This gives access to the necessary information to track automobiles in the inventory.
 The SaleRecord model handles a table for the sales person, customer, automobile (via the vin number) and the price of the automobile. The
 SaleRecord model also uses foreign keys for the sales person, customer and automobileVO in order to connect those tables and databases so that
-all the relevant information from each table is tracked with the sales.
+all the relevant information from each table is tracked with the sales and updated accordingly.

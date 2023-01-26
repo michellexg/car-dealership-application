@@ -1,18 +1,27 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
-function VehicleModelList({models, getModels}){
-    if (models === undefined){
-        return null;
-    }
+function VehicleModelList({}){
+    const [models, setModels] = useState([])
+
+    const getModels = async() => {
+        const response = await fetch('http://localhost:8100/api/models')
+        if (response.ok){
+          const data = await response.json();
+          const models = data.models;
+
+          setModels(models);
+        }
+      }
+
+    useEffect(() =>{
+        getModels();
+      }, [])
 
     return(
         <>
         <h1>Vehicle Model List</h1>
-        <ul>
-        <li className="nav-item">
-              <NavLink className="nav-link" to="/models/new">Create a Vehicle Model</NavLink>
-        </li>
-        </ul>
+              <Link className="btn btn-primary m-3" to="/models/new">Create a Vehicle Model</Link>
         <table className="table table-striped">
         <thead>
           <tr>

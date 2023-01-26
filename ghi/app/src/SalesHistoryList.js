@@ -1,8 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useForm } from 'react';
 
 
-function SalesHistoryList({ salerecords, salespersons }){
+function SalesHistoryList({ }){
     const [sales_person, setSalePerson] = useState([])
+    const [salespersons, setSalesPersons] = useState([])
+    const [salerecords, setSaleRecords] = useState([])
+
+    const getSalesPersons = async() => {
+        const response = await fetch('http://localhost:8090/api/sales/salesperson/')
+        if (response.ok){
+          const data = await response.json();
+          const salespersons = data.sales_person;
+          setSalesPersons(salespersons);
+        }
+      }
+
+      const getSaleRecords = async() => {
+        const response = await fetch('http://localhost:8090/api/sales/')
+        if (response.ok){
+          const data = await response.json();
+          const salerecords = data.salerecord;
+          setSaleRecords(salerecords);
+        }
+      }
+
     // const [sales_person_name, setSalePersonName] = useState('')
     // const [customer_name, setCustomerName] = useState('')
     // const [vin, setVin] = useState('')
@@ -28,10 +49,13 @@ function SalesHistoryList({ salerecords, salespersons }){
 
     }
 
-    // useEffect(() => {
-    //     clearState();
-    // }, []);
-console.log("logged:", salerecords.filter(salerecord => salerecord.sales_person.sales_person_name === sales_person))
+    useEffect(() => {
+        getSalesPersons();
+        getSaleRecords();
+        setSalePerson();
+        // clearState();
+    }, []);
+// console.log("logged:", salerecords.filter(salerecord => salerecord.sales_person.sales_person_name === sales_person))
 return (
 <>
     <div className="container">

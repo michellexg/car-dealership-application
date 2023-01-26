@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-function SaleRecordForm(props){
+function SaleRecordForm(){
     const [autos, setAutos] = useState([])
     const [salespersons, setSalePersons] = useState([])
     const [customers, setCustomers] = useState([])

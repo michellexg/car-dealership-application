@@ -81,7 +81,7 @@ def create_salerecord(request):
         content = json.loads(request.body)
         print(content)
         try:
-            auto = content["automobile"]  #href or automobile or vin????
+            auto = content["automobile"]  
             automobile = AutomobileVO.objects.get(import_href=auto) # href or id or vin????
             print(automobile)
             content["automobile"] = automobile
