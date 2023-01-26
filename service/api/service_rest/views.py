@@ -23,7 +23,8 @@ class AppointmentListEncoder(ModelEncoder):
         "datetime",
         "reason",
         "technician",
-        "finished"
+        "finished",
+        "vip",
     ]
 
     encoders = {
@@ -39,7 +40,8 @@ class AppointmentDetailEncdoder(ModelEncoder):
         "datetime",
         "reason",
         "technician",
-        "finished"
+        "finished",
+        "vip"
     ]
     encoders = {
         "technician": TechnicianListEncoder(),
@@ -76,6 +78,14 @@ def api_list_appointments(request, technician_id=None):
         )
     else:
         content = json.loads(request.body)
+        records = SaleRecordVO.objects.all()
+        vins = []
+        for record in records:
+            vins.append(record.vin)
+
+        if content["vin"] in vins:
+            content["vip"] = True
+
         try:
             technician_id=content["technician"]
             technician=Technician.objects.get(id=technician_id)

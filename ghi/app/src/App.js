@@ -88,11 +88,11 @@ function App() {
             <Route path="" element={<AutomobilesList />} />
             <Route path="new" element={<AutomobileForm />} />
           </Route>
-          <Route path="technicians/new/" element={<TechnicianForm />} />
           <Route path="appointments/">
             <Route path="" element={<AppointmentsList />} />
             <Route path="new/" element={<AppointmentForm />} />
             <Route path="history/" element={<ServiceHistory />} />
+            <Route path="technicians/new/" element={<TechnicianForm />} />
           </Route>
         </Routes>
       </div>

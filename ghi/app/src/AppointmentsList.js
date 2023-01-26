@@ -3,19 +3,20 @@ import { Link } from 'react-router-dom';
 
 
 
+
 function AppointmentsList() {
-    const [salesRecords, setSalesRecords] = useState([]);
+    // const [salesRecords, setSalesRecords] = useState([]);
     const [appointments, setAppointment] = useState([]);
-    const getSalesRecord = async () => {
-        const response = await fetch('http://localhost:8090/api/sales/');
-        if (response.ok) {
-            const data = await response.json();
-            const salesRecords = data.salerecord;
-            setSalesRecords(salesRecords);
-        } else {
-            console.error(response);
-        }
-    }
+    // const getSalesRecord = async () => {
+    //     const response = await fetch('http://localhost:8090/api/sales/');
+    //     if (response.ok) {
+    //         const data = await response.json();
+    //         const salesRecords = data.salerecord;
+    //         setSalesRecords(salesRecords);
+    //     } else {
+    //         console.error(response);
+    //     }
+    // }
 
     const getAppointment = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
@@ -37,10 +38,10 @@ function AppointmentsList() {
         // getManufacturers();
         // getAutomobiles();
         getAppointment();
-        getSalesRecord();
+        // getSalesRecord();
     }, [])
 
-    const vins = salesRecords.map((salesRecord) => salesRecord.automobile.vin);
+    // const vins = salesRecords.map((salesRecord) => salesRecord.automobile.vin);
 
     async function handleFinish(id) {
         const url = `http://localhost:8080/api/appointments/${id}`;
@@ -72,6 +73,7 @@ function AppointmentsList() {
 
     return (
         <div>
+            <Link className="btn btn-primary m-3" to="technicians/new/">Add Technician</Link>
             <Link className="btn btn-primary m-3" to="new/">Create Appointment</Link>
             <Link className="btn btn-primary m-3" to="history/">Find Appointment</Link>
             <table className="table table-striped m-3">
@@ -89,8 +91,12 @@ function AppointmentsList() {
                 </thead>
                 <tbody>
                     {appointments.map((appointment) => {
+                        // let vip = ""
+                        // if (vins.includes(appointment.vin)) {
+                        //     vip = "VIP"
+                        // }
                         let vip = ""
-                        if (vins.includes(appointment.vin)) {
+                        if (appointment.vip) {
                             vip = "VIP"
                         }
                         const dateObject = new Date(appointment.datetime);
