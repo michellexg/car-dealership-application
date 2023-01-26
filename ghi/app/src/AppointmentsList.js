@@ -1,8 +1,45 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
-function AppointmentsList({ appointments, salesRecords, getAppointment }) {
+function AppointmentsList() {
+    const [salesRecords, setSalesRecords] = useState([]);
+    const [appointments, setAppointment] = useState([]);
+    const getSalesRecord = async () => {
+        const response = await fetch('http://localhost:8090/api/sales/');
+        if (response.ok) {
+            const data = await response.json();
+            const salesRecords = data.salerecord;
+            setSalesRecords(salesRecords);
+        } else {
+            console.error(response);
+        }
+    }
+
+    const getAppointment = async () => {
+        const response = await fetch('http://localhost:8080/api/appointments/');
+        if (response.ok) {
+            const data = await response.json();
+            const appointments = data.appointments;
+            let unfinishedAppointment = []
+            for (let appointment of appointments) {
+                if (appointment.finished === false) {
+                    unfinishedAppointment.push(appointment)
+                }
+            }
+            setAppointment(unfinishedAppointment);
+        } else {
+            console.error(response);
+        }
+    }
+    useEffect(() => {
+        // getManufacturers();
+        // getAutomobiles();
+        getAppointment();
+        getSalesRecord();
+    }, [])
+
     const vins = salesRecords.map((salesRecord) => salesRecord.automobile.vin);
 
     async function handleFinish(id) {
@@ -34,50 +71,56 @@ function AppointmentsList({ appointments, salesRecords, getAppointment }) {
     }
 
     return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>VIN</th>
-                    <th>Customer name</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Technician</th>
-                    <th>Reason</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {appointments.map((appointment) => {
-                    let vip = ""
-                    if (vins.includes(appointment.vin)) {
-                        vip = "VIP"
-                    }
-                    const dateObject = new Date(appointment.datetime);
-                    const offset = dateObject.getTimezoneOffset()
-                    console.log("offset", offset)
-                    const date = dateObject.toLocaleDateString()
-                    const time = dateObject.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-                    return (
-                        <tr key={appointment.id} id={appointment.id}>
-                            <td>{vip}</td>
-                            <td>{appointment.vin}</td>
-                            <td>{appointment.name}</td>
-                            <td>{date}</td>
-                            <td>{time}</td>
-                            <td>{appointment.technician.name}</td>
-                            <td>{appointment.reason}</td>
-                            <td>
-                                <div className="btn-group" role="group">
-                                    <button type="button" className='btn btn-danger' onClick={() => handleDelete(appointment.id)}>Cancel</button>
-                                    <button type="button" className='btn btn-success' onClick={() => handleFinish(appointment.id)}>Finished</button>
-                                </div>
-                            </td>
-                        </tr>
-                    );
-                })}
-            </tbody>
-        </table>
+        <div>
+            <Link className="btn btn-primary m-3" to="new/">Create Appointment</Link>
+            <Link className="btn btn-primary m-3" to="history/">Find Appointment</Link>
+            <table className="table table-striped m-3">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>VIN</th>
+                        <th>Customer name</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Technician</th>
+                        <th>Reason</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {appointments.map((appointment) => {
+                        let vip = ""
+                        if (vins.includes(appointment.vin)) {
+                            vip = "VIP"
+                        }
+                        const dateObject = new Date(appointment.datetime);
+                        const date = dateObject.toLocaleDateString()
+                        const time = dateObject.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+                        // const time = dateObject.toTimeString()
+
+                        return (
+                            <tr key={appointment.id} id={appointment.id}>
+                                <td className='text-danger text-center'>
+                                    {vip}
+                                </td>
+                                <td>{appointment.vin}</td>
+                                <td>{appointment.name}</td>
+                                <td>{date}</td>
+                                <td>{time}</td>
+                                <td>{appointment.technician.name}</td>
+                                <td>{appointment.reason}</td>
+                                <td>
+                                    <div className="btn-group" role="group">
+                                        <button type="button" className='btn btn-danger' onClick={() => handleDelete(appointment.id)}>Cancel</button>
+                                        <button type="button" className='btn btn-success' onClick={() => handleFinish(appointment.id)}>Finished</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     )
 }
 

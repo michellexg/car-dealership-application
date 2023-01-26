@@ -39,11 +39,10 @@ function AutomobileForm() {
                 "Content-Type": "application/json",
             }
         }
-        console.log(data)
         const response = await fetch(url, fetchConfig);
-        console.log(response)
         if (response.ok) {
             const newAutomobile = await response.json();
+
             setColor('');
             setYear('');
             setVin('');
@@ -51,9 +50,6 @@ function AutomobileForm() {
 
         }
     }
-
-
-
 
     const fetchData = async () => {
         const url = 'http://localhost:8100/api/models/';

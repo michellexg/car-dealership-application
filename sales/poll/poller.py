@@ -17,7 +17,6 @@ from sales_rest.models import AutomobileVO
 def get_automobile():
     response = requests.get('http://inventory-api:8000/api/automobiles/')
     content = json.loads(response.content)
-    print(content)
     for auto in content["autos"]:
         AutomobileVO.objects.update_or_create(
             import_href = auto["href"],
@@ -33,10 +32,9 @@ def poll():
         try:
             # Write your polling logic, here
             get_automobile()
-            print(AutomobileVO.objects.all())
         except Exception as e:
             print(e, file=sys.stderr)
-        time.sleep(5)
+        time.sleep(30)
 
 
 if __name__ == "__main__":

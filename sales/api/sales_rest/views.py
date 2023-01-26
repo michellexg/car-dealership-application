@@ -77,7 +77,6 @@ def create_salerecord(request):
         try:
             auto = content["automobile"]  #href or automobile or vin????
             automobile = AutomobileVO.objects.get(import_href=auto) # href or id or vin????
-            # print(automobile)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(
@@ -98,8 +97,6 @@ def create_salerecord(request):
         try:
             customer_id = content["customer"]  #href or automobile or vin????
             customer = Customer.objects.get(id=customer_id) # href or id or vin????
-            print(customer)
-            # print(automobile)
             content["customer"] = customer
         except Customer.DoesNotExist:
             return JsonResponse(

@@ -35,12 +35,15 @@ function AppointmentForm() {
         }
         let time = `${event.target.value}:00${hour}:00`
         console.log("time is: ", time)
+
+
         // let utcTime = new Date(event.target.value);
         // let offset = utcTime.getTimezoneOffset();
         // let localTime = utcTime + offset;
         // console.log("offset", offset)
         // console.log("localTime", localTime)
         setDateTime(time);
+        console.log(event.target.value)
         // console.log("datetime is", datetime)
         // console.log(datetime)
     }
@@ -62,6 +65,7 @@ function AppointmentForm() {
         data.reason = reason;
         data.technician = technician;
 
+        console.log(data)
         const url = "http://localhost:8080/api/appointments/"
         const fetchConfig = {
             method: "POST",
