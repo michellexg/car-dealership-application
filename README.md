@@ -111,10 +111,10 @@ Returns (status code 200):
 }
 ```
 
-DELETE request to [/api/appointments/<id>]
+DELETE request to /api/appointments/<id>
 Delete appointments based on their id numbers
 
-POST request to [/api/appointments/<id>]
+POST request to /api/appointments/<id>
 Change appointment's "finished" status from default false to true based on their id numbers
 
 ### Sales Microservice
