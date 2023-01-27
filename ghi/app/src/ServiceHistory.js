@@ -21,14 +21,11 @@ function ServiceHistory() {
         }
     }
     useEffect(() => {
-        // getManufacturers();
-        // getAutomobiles();
         getAppointment();
     }, [])
 
     const [vin, setVin] = useState('');
     const [targetVin, setTargetVin] = useState('');
-    // const [vinAppointments, setVinAppointments] = useState([]);
 
     const handleVinChange = event => {
         setVin(event.target.value);

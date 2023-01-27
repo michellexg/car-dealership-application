@@ -24,23 +24,6 @@ function SalesHistoryList({ }) {
     }
   }
 
-  // const [sales_person_name, setSalePersonName] = useState('')
-  // const [customer_name, setCustomerName] = useState('')
-  // const [vin, setVin] = useState('')
-  // const [price, setPrice] = useState('')
-
-
-  // if (salerecords === undefined){
-  //     return null;
-  // }
-  // const clearState = () => {
-  //     setSalePersonName('');
-  //     setCustomerName('');
-  //     setVin('');
-  //     setPrice('');
-  // }
-
-
   const handleSalePerson = (event) => {
     // clearState();
     const value = event.target.value;
@@ -52,10 +35,7 @@ function SalesHistoryList({ }) {
   useEffect(() => {
     getSalesPersons();
     getSaleRecords();
-    // setSalePerson();
-    // clearState();
   }, []);
-  // console.log("logged:", salerecords.filter(salerecord => salerecord.sales_person.sales_person_name === sales_person))
   return (
     <>
       <div className="container">

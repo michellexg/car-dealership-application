@@ -18,11 +18,8 @@ function AppointmentForm() {
 
     const handleDateTimeChange = event => {
         let utcTime = new Date(event.target.value);
-        console.log("utcTime is: ", utcTime);
         let offset = utcTime.getTimezoneOffset();
-        console.log("offset is: ", offset)
         let offsetHour = offset / 60;
-        console.log("offsetHour is: ", offsetHour);
         let hour = ""
         if (offsetHour < 10 && offsetHour > 0) {
             hour = "-0" + offsetHour;
@@ -34,18 +31,7 @@ function AppointmentForm() {
             hour = "-" + offsetHour.toString();
         }
         let time = `${event.target.value}:00${hour}:00`
-        console.log("time is: ", time)
-
-
-        // let utcTime = new Date(event.target.value);
-        // let offset = utcTime.getTimezoneOffset();
-        // let localTime = utcTime + offset;
-        // console.log("offset", offset)
-        // console.log("localTime", localTime)
         setDateTime(time);
-        console.log(event.target.value)
-        // console.log("datetime is", datetime)
-        // console.log(datetime)
     }
 
     const handleReasonChange = event => {
@@ -64,8 +50,6 @@ function AppointmentForm() {
         data.datetime = datetime;
         data.reason = reason;
         data.technician = technician;
-
-        console.log(data)
         const url = "http://localhost:8080/api/appointments/"
         const fetchConfig = {
             method: "POST",
@@ -76,7 +60,6 @@ function AppointmentForm() {
         }
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            const newAutomobile = await response.json();
             setVin('');
             setName('');
             setDateTime('');
@@ -86,13 +69,9 @@ function AppointmentForm() {
         }
     }
 
-
-
-
     const fetchData = async () => {
         const url = 'http://localhost:8080/api/technicians/';
         const response = await fetch(url);
-
 
         if (response.ok) {
             const data = await response.json();

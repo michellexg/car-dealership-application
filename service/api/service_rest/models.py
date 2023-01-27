@@ -26,9 +26,5 @@ class Appointment(models.Model):
         related_name="appointment",
         on_delete=models.CASCADE
     )
-
-    # def get_api_url(self):
-    #     return reverse("api_show_appointment", kwargs={"pk": self.pk})
-
     def __str__(self) :
         return self.name

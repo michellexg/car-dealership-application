@@ -1,22 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-
-
-
 function AppointmentsList() {
-    // const [salesRecords, setSalesRecords] = useState([]);
     const [appointments, setAppointment] = useState([]);
-    // const getSalesRecord = async () => {
-    //     const response = await fetch('http://localhost:8090/api/sales/');
-    //     if (response.ok) {
-    //         const data = await response.json();
-    //         const salesRecords = data.salerecord;
-    //         setSalesRecords(salesRecords);
-    //     } else {
-    //         console.error(response);
-    //     }
-    // }
 
     const getAppointment = async () => {
         const response = await fetch('http://localhost:8080/api/appointments/');
@@ -35,13 +21,8 @@ function AppointmentsList() {
         }
     }
     useEffect(() => {
-        // getManufacturers();
-        // getAutomobiles();
         getAppointment();
-        // getSalesRecord();
     }, [])
-
-    // const vins = salesRecords.map((salesRecord) => salesRecord.automobile.vin);
 
     async function handleFinish(id) {
         const url = `http://localhost:8080/api/appointments/${id}`;
@@ -91,10 +72,6 @@ function AppointmentsList() {
                 </thead>
                 <tbody>
                     {appointments.map((appointment) => {
-                        // let vip = ""
-                        // if (vins.includes(appointment.vin)) {
-                        //     vip = "VIP"
-                        // }
                         let vip = ""
                         if (appointment.vip) {
                             vip = "VIP"
@@ -102,8 +79,6 @@ function AppointmentsList() {
                         const dateObject = new Date(appointment.datetime);
                         const date = dateObject.toLocaleDateString()
                         const time = dateObject.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-                        // const time = dateObject.toTimeString()
-
                         return (
                             <tr key={appointment.id} id={appointment.id}>
                                 <td className='text-danger text-center'>

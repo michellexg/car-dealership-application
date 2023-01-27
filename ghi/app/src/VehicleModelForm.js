@@ -1,63 +1,61 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-function VehicleModelForm(){
-    const [manufacturers, setManufacturers] = useState([]);
-    const [manufacturer_id, setManufacturer] = useState('');
-    const [name, setName] = useState('');
-    const [picture_url, setPicture] = useState('');
+function VehicleModelForm() {
+  const [manufacturers, setManufacturers] = useState([]);
+  const [manufacturer_id, setManufacturer] = useState('');
+  const [name, setName] = useState('');
+  const [picture_url, setPicture] = useState('');
 
-    const handleName = (event) => {
-        const value = event.target.value;
-        setName(value);
+  const handleName = (event) => {
+    const value = event.target.value;
+    setName(value);
+  }
+  const handleManufacturer = (event) => {
+    const value = event.target.value;
+    setManufacturer(value);
+  }
+
+  const handlePicture = (event) => {
+    const value = event.target.value;
+    setPicture(value);
+  }
+
+  const handleSubmit = async (event) => {
+    const data = {};
+    event.preventDefault();
+    data.name = name;
+    data.manufacturer_id = manufacturer_id;
+    data.picture_url = picture_url;
+
+    const modelsUrl = 'http://localhost:8100/api/models/';
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(modelsUrl, fetchConfig);
+    if (response.ok) {
+      setName('');
+      setManufacturer('');
+      setPicture('');
     }
-    const handleManufacturer = (event) => {
-        const value = event.target.value;
-        setManufacturer(value);
-    }
-
-    const handlePicture = (event) => {
-        const value = event.target.value;
-        setPicture(value);
-    }
-
-    const handleSubmit = async (event) => {
-        const data = {};
-        event.preventDefault();
-        data.name = name;
-        data.manufacturer_id = manufacturer_id;
-        data.picture_url = picture_url;
-
-        const modelsUrl = 'http://localhost:8100/api/models/';
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        console.log(data)
-        const response = await fetch(modelsUrl, fetchConfig);
-        if (response.ok){
-            const newModel = await response.json();
-            setName('');
-            setManufacturer('');
-            setPicture('');
-        }
-    }
-const fetchData = async () => {
+  }
+  const fetchData = async () => {
     const url = 'http://localhost:8100/api/manufacturers/';
-     const response = await fetch(url);
+    const response = await fetch(url);
 
-     if (response.ok){
-        const data = await response.json();
-        setManufacturers(data.manufacturers);
-     }
-}
-useEffect(() => {
+    if (response.ok) {
+      const data = await response.json();
+      setManufacturers(data.manufacturers);
+    }
+  }
+  useEffect(() => {
     fetchData();
-}, []);
+  }, []);
 
-return (
+  return (
     <div className="container">
       <div className="row">
         <div className="offset-3 col-6">
@@ -75,13 +73,13 @@ return (
               <div className="mb-3">
                 <select onChange={handleManufacturer} value={manufacturer_id} required name="manufacturer_id" id="manufacturer_id" className="form-select">
                   <option>Choose a Manufacturer</option>
-                    {manufacturers.map(manufacturer => {
-                        return (
-                            <option key={manufacturer.id} value={manufacturer.id}>
-                                {manufacturer.name}
-                            </option>
-                        )
-                    })}
+                  {manufacturers.map(manufacturer => {
+                    return (
+                      <option key={manufacturer.id} value={manufacturer.id}>
+                        {manufacturer.name}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
 
@@ -91,6 +89,6 @@ return (
         </div>
       </div>
     </div>
-)
+  )
 }
 export default VehicleModelForm;

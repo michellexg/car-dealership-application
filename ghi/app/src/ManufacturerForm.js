@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 function ManufacturerForm() {
     const [name, setName] = useState('');
@@ -21,7 +21,6 @@ function ManufacturerForm() {
         }
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            const newManufacturer = await response.json();
             setName('');
         }
 

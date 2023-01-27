@@ -11,8 +11,6 @@ django.setup()
 
 from sales_rest import models
 from sales_rest.models import AutomobileVO
-# Import models from sales_rest, here.
-# from sales_rest.models import Something
 
 def poll():
     while True:
@@ -30,9 +28,7 @@ def poll():
                     },
 
                 )
-            # Write your polling logic, here
             automobile = AutomobileVO.objects.all()
-            # print(automobile)
         except Exception as e:
             print(e, file=sys.stderr)
         time.sleep(30)

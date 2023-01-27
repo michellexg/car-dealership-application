@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-function SaleRecordForm(){
+function SaleRecordForm() {
     const [autos, setAutos] = useState([])
     const [salespersons, setSalePersons] = useState([])
     const [customers, setCustomers] = useState([])
@@ -45,97 +45,94 @@ function SaleRecordForm(){
                 'Content-Type': 'application/json',
             },
         };
-        console.log(data)
         const response = await fetch(salerecordUrl, fetchConfig);
-        if (response.ok){
-            const newSaleRecord = await response.json();
+        if (response.ok) {
             setAutomobile('');
             setSalesPerson('');
             setCustomer('');
             setPrice('');
         }
     }
-const fetchData = async () => {
-    const url = 'http://localhost:8100/api/automobiles/';
-     const response = await fetch(url);
-     if (response.ok){
-        const data = await response.json();
-        setAutos(data.autos);
-        console.log("data:", data);
-     }
-     const customerurl = 'http://localhost:8090/api/sales/customer/';
-     const response1 = await fetch(customerurl);
-     if (response1.ok){
-        const data1 = await response1.json();
-        setCustomers(data1.customer);
+    const fetchData = async () => {
+        const url = 'http://localhost:8100/api/automobiles/';
+        const response = await fetch(url);
+        if (response.ok) {
+            const data = await response.json();
+            setAutos(data.autos);
+        }
+        const customerurl = 'http://localhost:8090/api/sales/customer/';
+        const response1 = await fetch(customerurl);
+        if (response1.ok) {
+            const data1 = await response1.json();
+            setCustomers(data1.customer);
 
-     }
-     const salespersonurl = 'http://localhost:8090/api/sales/salesperson/';
-     const response2 = await fetch(salespersonurl);
-     if (response2.ok){
-        const data2 = await response2.json();
-        setSalePersons(data2.sales_person)
-     }
+        }
+        const salespersonurl = 'http://localhost:8090/api/sales/salesperson/';
+        const response2 = await fetch(salespersonurl);
+        if (response2.ok) {
+            const data2 = await response2.json();
+            setSalePersons(data2.sales_person)
+        }
     }
 
-useEffect(() => {
-    fetchData();
-}, []);
+    useEffect(() => {
+        fetchData();
+    }, []);
 
-return (
-    <div className="container">
-      <div className="row">
-        <div className="offset-3 col-6">
-          <div className="shadow p-4 mt-4">
-            <h1>Record a new sale</h1>
-            <form onSubmit={handleSubmit} id="create-salerecord-form">
-            <div className="mb-3">
-                <select onChange={handleAutomobile} value={automobile} required type="number" name="automobile" id="automobile" className="form-select">
-                  <option >Choose an Automobile</option>
-                    {autos.map(auto => {
-                        return (
-                            <option key={auto.href} value={auto.href}>
-                                {auto.vin}
-                            </option>
-                        )
-                    })}
-                </select>
-              </div>
-              <div className="mb-3">
-                <select onChange={handleSalesPerson} value={sales_person} required type="number" name="sales_person" id="sales_person" className="form-select">
-                  <option >Choose a Sales person</option>
-                    {salespersons.map(sale => {
-                        return (
-                            <option key={sale.sales_person_name} value={sale.id}>
-                                {sale.employee_number} {sale.sales_person_name}
-                            </option>
-                        )
-                    })}
-                </select>
-              </div>
-              <div className="mb-3">
-                <select onChange={handleCustomer} value={customer} required type="number" name="customer" id="customer" className="form-select">
-                  <option>Choose a Customer</option>
-                    {customers.map(cust => {
-                        return (
-                            <option key={cust.customer_name} value={cust.id}>
-                                {cust.customer_name}
-                            </option>
-                        )
-                    })}
-                </select>
-              </div>
-              <div className="form-floating mb-3">
-                <input onChange={handlePrice}  value={price} placeholder="Price" required type="number" name="price" id="price" className="form-control" />
-                <label htmlFor="price">Price</label>
-              </div>
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="offset-3 col-6">
+                    <div className="shadow p-4 mt-4">
+                        <h1>Record a new sale</h1>
+                        <form onSubmit={handleSubmit} id="create-salerecord-form">
+                            <div className="mb-3">
+                                <select onChange={handleAutomobile} value={automobile} required type="number" name="automobile" id="automobile" className="form-select">
+                                    <option >Choose an Automobile</option>
+                                    {autos.map(auto => {
+                                        return (
+                                            <option key={auto.href} value={auto.href}>
+                                                {auto.vin}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <select onChange={handleSalesPerson} value={sales_person} required type="number" name="sales_person" id="sales_person" className="form-select">
+                                    <option >Choose a Sales person</option>
+                                    {salespersons.map(sale => {
+                                        return (
+                                            <option key={sale.sales_person_name} value={sale.id}>
+                                                {sale.employee_number} {sale.sales_person_name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <div className="mb-3">
+                                <select onChange={handleCustomer} value={customer} required type="number" name="customer" id="customer" className="form-select">
+                                    <option>Choose a Customer</option>
+                                    {customers.map(cust => {
+                                        return (
+                                            <option key={cust.customer_name} value={cust.id}>
+                                                {cust.customer_name}
+                                            </option>
+                                        )
+                                    })}
+                                </select>
+                            </div>
+                            <div className="form-floating mb-3">
+                                <input onChange={handlePrice} value={price} placeholder="Price" required type="number" name="price" id="price" className="form-control" />
+                                <label htmlFor="price">Price</label>
+                            </div>
 
-              <button className="btn btn-primary">Create</button>
-            </form>
-          </div>
+                            <button className="btn btn-primary">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-)
+    )
 }
 export default SaleRecordForm;

@@ -41,13 +41,10 @@ function AutomobileForm() {
         }
         const response = await fetch(url, fetchConfig);
         if (response.ok) {
-            const newAutomobile = await response.json();
-
             setColor('');
             setYear('');
             setVin('');
             setModel('');
-
         }
     }
 

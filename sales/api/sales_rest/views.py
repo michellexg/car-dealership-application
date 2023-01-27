@@ -79,11 +79,9 @@ def list_sales(request):
 def create_salerecord(request):
     if request.method == "POST":
         content = json.loads(request.body)
-        print(content)
         try:
             auto = content["automobile"]
-            automobile = AutomobileVO.objects.get(import_href=auto) # href or id or vin????
-            print(automobile)
+            automobile = AutomobileVO.objects.get(import_href=auto)
             content["automobile"] = automobile
         except AutomobileVO.DoesNotExist:
             return JsonResponse(

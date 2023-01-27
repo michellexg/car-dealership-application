@@ -1,50 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 
-function CustomerForm(){
-    const [customer_name, setCustomerName] = useState('')
-    const [address, setAddress] = useState('')
-    const [phone_number, setPhoneNumber] = useState('')
+function CustomerForm() {
+  const [customer_name, setCustomerName] = useState('')
+  const [address, setAddress] = useState('')
+  const [phone_number, setPhoneNumber] = useState('')
 
-    const handleCustomer = (event) => {
-        const value = event.target.value;
-        setCustomerName(value);
+  const handleCustomer = (event) => {
+    const value = event.target.value;
+    setCustomerName(value);
+  }
+  const handleAddress = (event) => {
+    const value = event.target.value;
+    setAddress(value);
+  }
+
+  const handlePhoneNumber = (event) => {
+    const value = event.target.value;
+    setPhoneNumber(value);
+  }
+  const handleSubmit = async (event) => {
+    const data = {};
+    event.preventDefault();
+    data.customer_name = customer_name;
+    data.address = address;
+    data.phone_number = phone_number
+
+    const customerUrl = 'http://localhost:8090/api/sales/customer/';
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(customerUrl, fetchConfig);
+    if (response.ok) {
+      setCustomerName('');
+      setAddress('');
+      setPhoneNumber('');
     }
-    const handleAddress = (event) => {
-        const value = event.target.value;
-        setAddress(value);
-    }
+  }
 
-    const handlePhoneNumber = (event) => {
-        const value = event.target.value;
-        setPhoneNumber(value);
-    }
-    const handleSubmit = async (event) => {
-        const data = {};
-        event.preventDefault();
-        data.customer_name = customer_name;
-        data.address = address;
-        data.phone_number = phone_number
-
-        const customerUrl = 'http://localhost:8090/api/sales/customer/';
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        console.log(data)
-        const response = await fetch(customerUrl, fetchConfig);
-        if (response.ok){
-            const newCustomer = await response.json();
-            setCustomerName('');
-            setAddress('');
-            setPhoneNumber('');
-        }
-    }
-
-return (
+  return (
     <div className="container">
       <div className="row">
         <div className="offset-3 col-6">
@@ -69,6 +67,6 @@ return (
         </div>
       </div>
     </div>
-)
+  )
 }
 export default CustomerForm;

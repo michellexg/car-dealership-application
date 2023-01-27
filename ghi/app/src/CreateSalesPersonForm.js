@@ -1,42 +1,40 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
-function SalesPersonForm(){
-    const [sales_person_name, setSalesPerson] = useState('')
-    const [employee_number, setEmployeeNumber] = useState('')
+function SalesPersonForm() {
+  const [sales_person_name, setSalesPerson] = useState('')
+  const [employee_number, setEmployeeNumber] = useState('')
 
-    const handleSalesPerson = (event) => {
-        const value = event.target.value;
-        setSalesPerson(value);
+  const handleSalesPerson = (event) => {
+    const value = event.target.value;
+    setSalesPerson(value);
+  }
+  const handleEmployeeNumber = (event) => {
+    const value = event.target.value;
+    setEmployeeNumber(value);
+  }
+  const handleSubmit = async (event) => {
+    const data = {};
+    event.preventDefault();
+    data.sales_person_name = sales_person_name;
+    data.employee_number = employee_number;
+
+    const salespersonUrl = 'http://localhost:8090/api/sales/salesperson/';
+    const fetchConfig = {
+      method: "post",
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    const response = await fetch(salespersonUrl, fetchConfig);
+    if (response.ok) {
+      setSalesPerson('');
+      setEmployeeNumber('');
     }
-    const handleEmployeeNumber = (event) => {
-        const value = event.target.value;
-        setEmployeeNumber(value);
-    }
-    const handleSubmit = async (event) => {
-        const data = {};
-        event.preventDefault();
-        data.sales_person_name = sales_person_name;
-        data.employee_number = employee_number;
-
-        const salespersonUrl = 'http://localhost:8090/api/sales/salesperson/';
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        console.log(data)
-        const response = await fetch(salespersonUrl, fetchConfig);
-        if (response.ok){
-            const newSalesPerson = await response.json();
-            setSalesPerson('');
-            setEmployeeNumber('');
-        }
-    }
+  }
 
 
-return (
+  return (
     <div className="container">
       <div className="row">
         <div className="offset-3 col-6">
@@ -57,6 +55,6 @@ return (
         </div>
       </div>
     </div>
-)
+  )
 }
 export default SalesPersonForm;
