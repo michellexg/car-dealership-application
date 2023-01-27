@@ -6,6 +6,7 @@ Team:
 * Tyler Herman - Sales
 
 ## How to Run this Application
+### Setup
 * Go to [gitlab.com/felipsh/project-beta](https://gitlab.com/felipsh/project-beta)
 * Click “Clone” to clone project and copy the https link.
 In terminal, run following commands:
@@ -16,7 +17,7 @@ In terminal, run following commands:
 
 In browser visit: [http://localhost:3000/](http://localhost:3000/)
 
-Entering Data:
+### Entering Data:
 
 Select Manufacturers on the navbar
 * Select the Add Manufacturer button
@@ -38,22 +39,6 @@ Select Automobiles on the navbar
 * For Model select “Civic”, which you entered before
 * Return to Automobiles via the navbar, you will see your data in the table
 
-Select Service Appointment on the navbar
-* Select the Add Technician button
-	* For Name enter “Mike Mechanic”
-	* For Employee Number enter “1”
-	* Return to the Service Appointment Page
-* Select the Create Appointment button
-	* For Vin enter “KL4CJFSB7FB096115”
-	* For Name enter “John Doe”
-	* For Date and Time enter “01/01/2024 08:00—
-	* For Reason enter “Flat Tire”
-	* For Technician select “Mike Mechanic”
-	* Return to the Service Appointment page and you will see your appointment logged in the table
-* Select Find Appointment
-	* In the VIN search bar enter ““KL4CJFSB7FB096115”
-	* Once you select Search, you will see your newly made appointment populate below
-
 Select Sales on the Navbar
 * Select the Add a Sales Person button
 	* Under Name enter “Sally Sales”
@@ -72,6 +57,23 @@ Select Sales on the Navbar
 * Select Sales person history
 	* On the choose a sales person dropdown select “Sally Sales”
 	* You will see the record of sale you created in the previous step populate the table
+
+Select Service Appointment on the navbar
+* Select the Add Technician button
+	* For Name enter “Mike Mechanic”
+	* For Employee Number enter “1”
+	* Return to the Service Appointment Page
+* Select the Create Appointment button
+	* For Vin enter “KL4CJFSB7FB096115”
+	* For Name enter “John Doe”
+	* For Date and Time enter “01/01/2024 08:00—
+	* For Reason enter “Flat Tire”
+	* For Technician select “Mike Mechanic”
+	* Return to the Service Appointment page and you will see your appointment logged in the table
+* Select Find Appointment
+	* In the VIN search bar enter ““KL4CJFSB7FB096115”
+	* Once you select Search, you will see your newly made appointment populate below
+
 
 ## Design
 ![Excalidraw link](picture/Project_beta_design.png)
