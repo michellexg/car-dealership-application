@@ -17,21 +17,8 @@ function AppointmentForm() {
     }
 
     const handleDateTimeChange = event => {
-        let utcTime = new Date(event.target.value);
-        let offset = utcTime.getTimezoneOffset();
-        let offsetHour = offset / 60;
-        let hour = ""
-        if (offsetHour < 10 && offsetHour > 0) {
-            hour = "-0" + offsetHour;
-        } else if (offsetHour > 10) {
-            hour = "-" + offsetHour.toString();
-        } else if (offsetHour < 0 && offsetHour > -10) {
-            hour = "+0" + offsetHour;
-        } else {
-            hour = "-" + offsetHour.toString();
-        }
-        let time = `${event.target.value}:00${hour}:00`
-        setDateTime(time);
+
+        setDateTime(event.target.value);
     }
 
     const handleReasonChange = event => {
@@ -47,7 +34,23 @@ function AppointmentForm() {
         const data = {};
         data.vin = vin;
         data.name = name;
-        data.datetime = datetime;
+
+        let utcTime = new Date(datetime);
+        let offset = utcTime.getTimezoneOffset();
+        let offsetHour = offset / 60;
+        let hour = ""
+        if (offsetHour < 10 && offsetHour > 0) {
+            hour = "-0" + offsetHour;
+        } else if (offsetHour > 10) {
+            hour = "-" + offsetHour.toString();
+        } else if (offsetHour < 0 && offsetHour > -10) {
+            hour = "+0" + offsetHour;
+        } else {
+            hour = "-" + offsetHour.toString();
+        }
+        let time = `${datetime}:00${hour}:00`
+
+        data.datetime = time;
         data.reason = reason;
         data.technician = technician;
         const url = "http://localhost:8080/api/appointments/"

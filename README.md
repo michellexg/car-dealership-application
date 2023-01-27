@@ -33,7 +33,7 @@ Select Vehicle Models on the navbar
 
 Select Automobiles on the navbar
 * Select the Add Automobile button
-* For Color enter “Orange
+* For Color enter “Orange"
 * For Year 2012
 * For VIN enter “KL4CJFSB7FB096115”
 * For Model select “Civic”, which you entered before
