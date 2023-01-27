@@ -157,16 +157,18 @@ Request body:
 Returns (status code 200):
 ```
 {
-	"id": 15,
+	"id": 3,
 	"vin": "1C3CC5FB2AN120171",
 	"name": "Jane",
 	"datetime": "2023-01-23T10:00:00+01:00",
 	"reason": "Change Oil",
 	"technician": {
 		"name": "Jack",
-		"employee_number": "1234567",
+		"employee_number": "1123",
 		"id": 1
-	}
+	},
+	"finished": false,
+	"vip": false
 }
 ```
 
